@@ -159,6 +159,35 @@ Le projet suit les principes de Clean Architecture avec une séparation en couch
 - **Infrastructure** : Contient les implémentations techniques
 - **Presentation** : Contient les contrôleurs HTTP
 
+### Inversion de Dépendance
+
+Le projet utilise le principe d'inversion de dépendance (DIP) :
+
+```typescript
+// Interface dans le domaine
+interface OrderRepositoryInterface {
+  save(order: Order): Order;
+  findById(id: string): Order | undefined;
+  findAll(): Order[];
+}
+
+// Use case dépend de l'interface
+class CreateOrderUseCase {
+  constructor(private readonly orderRepository: OrderRepositoryInterface) {}
+}
+
+// Implémentation concrète dans l'infrastructure
+class MemoryOrderRepository implements OrderRepositoryInterface {
+  // ...
+}
+```
+
+Les avantages :
+
+- Découplage entre les use cases et l'implémentation du repository
+- Facilité pour changer l'implémentation (ex: passer d'une base mémoire à MongoDB)
+- Meilleure testabilité avec possibilité de mock
+
 ## Injection de Dépendances
 
 Le projet utilise un container de dépendances simple pour gérer les singletons :

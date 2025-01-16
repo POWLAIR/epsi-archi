@@ -5,7 +5,7 @@ import {
 } from "../application/create-order.usecase";
 import { PayOrderUseCase } from "../application/pay-order.usecase";
 import { Container } from "../../shared/container";
-import { OrderRepository } from "../domain/order.repository";
+import { OrderRepositoryInterface } from "../domain/order.repository.interface";
 import { initializeOrderContainer } from "../infrastructure/container";
 import { CancelOrderUseCase } from "../application/cancel-order.usecase";
 
@@ -13,7 +13,8 @@ import { CancelOrderUseCase } from "../application/cancel-order.usecase";
 initializeOrderContainer();
 
 const router = express.Router();
-const orderRepository = Container.get<OrderRepository>("OrderRepository");
+const orderRepository =
+  Container.get<OrderRepositoryInterface>("OrderRepository");
 const createOrderUseCase = new CreateOrderUseCase(orderRepository);
 const payOrderUseCase = new PayOrderUseCase(orderRepository);
 const cancelOrderUseCase = new CancelOrderUseCase(orderRepository);

@@ -1,9 +1,9 @@
 import { Container } from "../../shared/container";
-import { OrderRepository } from "../domain/order.repository";
+import { OrderRepositoryInterface } from "../domain/order.repository.interface";
 import { MemoryOrderRepository } from "./memory-order.repository";
 
 export function initializeOrderContainer(): void {
-  Container.register<OrderRepository>(
+  Container.register<OrderRepositoryInterface>(
     "OrderRepository",
     new MemoryOrderRepository()
   );

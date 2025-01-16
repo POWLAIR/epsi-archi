@@ -1,8 +1,8 @@
 import Order from "../domain/order.entity";
-import { OrderRepository } from "../domain/order.repository";
+import { OrderRepositoryInterface } from "../domain/order.repository.interface";
 
 export class PayOrderUseCase {
-  constructor(private readonly orderRepository: OrderRepository) {}
+  constructor(private readonly orderRepository: OrderRepositoryInterface) {}
 
   execute(orderId: string): Order {
     const order = this.orderRepository.findById(orderId);

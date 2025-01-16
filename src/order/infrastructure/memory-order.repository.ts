@@ -1,7 +1,7 @@
 import Order from "../domain/order.entity";
-import { OrderRepository } from "../domain/order.repository";
+import { OrderRepositoryInterface } from "../domain/order.repository.interface";
 
-export class MemoryOrderRepository implements OrderRepository {
+export class MemoryOrderRepository implements OrderRepositoryInterface {
   private orders: Map<string, Order> = new Map();
   private currentId: number = 1;
 
@@ -16,5 +16,9 @@ export class MemoryOrderRepository implements OrderRepository {
 
   findById(id: string): Order | undefined {
     return this.orders.get(id);
+  }
+
+  findAll(): Order[] {
+    return Array.from(this.orders.values());
   }
 }

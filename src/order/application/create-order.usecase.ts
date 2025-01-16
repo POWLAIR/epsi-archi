@@ -1,5 +1,5 @@
 import Order from "../domain/order.entity";
-import { OrderRepository } from "../domain/order.repository";
+import { OrderRepositoryInterface } from "../domain/order.repository.interface";
 
 interface Product {
   id: number;
@@ -12,7 +12,7 @@ export interface CreateOrderRequest {
 }
 
 export class CreateOrderUseCase {
-  constructor(private readonly orderRepository: OrderRepository) {}
+  constructor(private readonly orderRepository: OrderRepositoryInterface) {}
 
   execute(request: CreateOrderRequest): Order {
     const newOrder = new Order(
